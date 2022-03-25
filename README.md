@@ -4,5 +4,5 @@ use JavaScript's Leaflet library along with the map-box API to create visualizat
 # Resources
 
 - Javascript, HTML, VS Code 1.65
-- mapbox.com
-- leaflet.js
+- [mapbox](https://www.mapbox.com/)
+- [leaflet.js](https://leafletjs.com/)
