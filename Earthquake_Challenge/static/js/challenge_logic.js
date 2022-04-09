@@ -31,12 +31,12 @@ let baseMaps = {
 // 1. Add a 2nd layer group for the tectonic plate data.
 let allEarthquakes = new L.LayerGroup();
 let tectonicPlates = new L.LayerGroup();
-let majorEarthquake = new L.LayerGroup();
+let majorEarthquakes = new L.LayerGroup();
 // 2. Add a reference to the tectonic plates group to the overlays object.
 let overlays = {
   "Earthquakes": allEarthquakes,
   "Tectonic Plates": tectonicPlates,
-  "Major Earthquake": majorEarthquake
+  "Major Earthquake": majorEarthquakes
 };
 
 // Then we add a control to the map that will allow the user to change which
@@ -180,6 +180,18 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geoj
     }
     
   };
+
+  function styleInfoMajor(feature) {
+    return {
+      opacity: 1,
+      fillOpacity: 1,
+      fillColor: getColor(feature.properties.mag),
+      color: "#000000",
+      radius: getRadius(feature.properties.mag),
+      stroke: true,
+      weight: 0.5
+    };
+  }
 // create geojson layer with data 
 L.geoJson(data, {
   // turn feature into circle marker 
@@ -188,6 +200,7 @@ L.geoJson(data, {
   },
   // use styleinfo function to style major earthquakes 
   style: styleInfoMajor,
+
   // create popup for each circle marker 
   onEachFeature: function(feature, layer) {
     layer.bindPopup("Magnitude: " + feature.properties.mag + "<hr>Location: " + feature.properties.place);
